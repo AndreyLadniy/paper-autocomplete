@@ -11,7 +11,7 @@
 <!--
   `paper-autocomplete`
 
-  Paper Input Autocomplete field to offer a type-ahead functionality for Polymer v1.0.0 or greater.
+  Paper Input Autocomplete field to offer a type-ahead functionality for Polymer v2.0.0 or greater.
 
   paper-autocomplete extends earlier efforts such as this (https://github.com/rodo1111/paper-input-autocomplete)
   to provide keyboard support, remote binding and results scrolling.
@@ -140,7 +140,7 @@
 
     paper-autocomplete-suggestions {
       --suggestions-wrapper: {
-        @apply(--paper-autocomplete-suggestions-wrapper);
+        apply --paper-autocomplete-suggestions-wrapper;
       };
 
       --paper-item-min-height: var(--paper-autocomplete-suggestions-item-min-height, 36px);
@@ -194,7 +194,7 @@
                                     event-namespace="[[eventNamespace]]"
                                     highlighted-suggestion="{{_highlightedSuggestion}}"
                                     is-open="{{_isSuggestionsOpened}}">
-      <content id="templates" select="[autocomplete-custom-template]"></content>
+      <slot id="templates" name="autocomplete-custom-template" slot="autocomplete-custom-template"></slot>
     </paper-autocomplete-suggestions>
   </template>
 </dom-module>
