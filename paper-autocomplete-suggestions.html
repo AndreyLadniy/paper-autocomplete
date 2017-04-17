@@ -533,16 +533,16 @@
             });
 
 
-          clone.children.forEach(el => {
-            if (el.nodeType === Node.ELEMENT_NODE) {
-            el.id = this._getSuggestionId(index);
-            el.addEventListener('tap', this._bindedFunctions._onSelect)
-          }
-        });
+            clone.children.forEach(el => {
+              if (el.nodeType === Node.ELEMENT_NODE) {
+                el.id = this._getSuggestionId(index);
+                el.addEventListener('tap', this._bindedFunctions._onSelect)
+              }
+            });
 
-          this.$.suggestionsWrapper.appendChild(clone.root);
+            this.$.suggestionsWrapper.appendChild(clone.root);
 
-        });
+          });
         }
 
         _clearSuggestions() {
@@ -550,8 +550,8 @@
 
           Array.from(suggestionsContainer.children).forEach(el => {
             el.removeEventListener('tap', this._bindedFunctions._onSelect);
-          suggestionsContainer.removeChild(el)
-        });
+            suggestionsContainer.removeChild(el)
+          });
         }
 
         /**
@@ -938,3 +938,4 @@
   </script>
 
 </dom-module>
+
