@@ -1,4 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
+
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-ripple/paper-ripple.html">
 
@@ -199,7 +201,7 @@
         ESCAPE: 27
       };
 
-      class PaperAutocompleteSuggestions extends Polymer.mixinBehaviors([Polymer.Templatizer], Polymer.Element) {
+      class PaperAutocompleteSuggestions extends Polymer.mixinBehaviors([Polymer.Templatizer], Polymer.GestureEventListeners(Polymer.Element)) {
 
         static get is() {
           return 'paper-autocomplete-suggestions';
@@ -532,11 +534,19 @@
               index: index
             });
 
+            if (!clone.index) {
+              clone.index = index;
+            }
+
+            if (!clone.item) {
+              clone.item = result;
+            }
 
             clone.children.forEach(el => {
               if (el.nodeType === Node.ELEMENT_NODE) {
                 el.id = this._getSuggestionId(index);
-                el.addEventListener('tap', this._bindedFunctions._onSelect)
+                Polymer.Gestures.addListener(el, 'tap', this._bindedFunctions._onSelect);
+//                el.addEventListener('tap', this._bindedFunctions._onSelect)
               }
             });
 
@@ -549,7 +559,8 @@
           var suggestionsContainer = this.$.suggestionsWrapper;
 
           Array.from(suggestionsContainer.children).forEach(el => {
-            el.removeEventListener('tap', this._bindedFunctions._onSelect);
+            Polymer.Gestures.removeListener(el, 'tap', this._bindedFunctions._onSelect);
+//            el.removeEventListener('tap', this._bindedFunctions._onSelect);
             suggestionsContainer.removeChild(el)
           });
         }
